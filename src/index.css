@@ -66,6 +66,7 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 } */
+<<<<<<< HEAD
 
 
 @import "leaflet/dist/leaflet.css";
@@ -73,3 +74,8 @@ button:focus-visible {
 @tailwind components;
 @tailwind utilities;
 
+=======
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+>>>>>>> 7bc40638d475e70bc801c2ace5178b1769d416b7

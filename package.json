@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "modern-hotel-client",
+=======
+  "name": "modern-hotel",
+>>>>>>> 7bc40638d475e70bc801c2ace5178b1769d416b7
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,6 +14,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+<<<<<<< HEAD
     "firebase": "^11.1.0",
     "leaflet": "^1.9.4",
     "localforage": "^1.10.0",
@@ -29,6 +34,15 @@
   "devDependencies": {
     "@eslint/js": "^9.17.0",
     "@types/react": "^18.3.18",
+=======
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.1.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@types/react": "^18.3.17",
+>>>>>>> 7bc40638d475e70bc801c2ace5178b1769d416b7
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
@@ -37,9 +51,16 @@
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.16",
+<<<<<<< HEAD
     "globals": "^15.14.0",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.17",
     "vite": "^6.0.5"
+=======
+    "globals": "^15.13.0",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "vite": "^6.0.3"
+>>>>>>> 7bc40638d475e70bc801c2ace5178b1769d416b7
   }
 }
