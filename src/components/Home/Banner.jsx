@@ -6,7 +6,7 @@ import "swiper/css/navigation";
 
 const Banner = () => {
   return (
-    <div className="w-full mt-23 h-[600px] bg-gradient-to-r from-[#1a1a1d] to-[#4e4e50] overflow-hidden shadow-2xl">
+    <div className="w-full mt-[93px] h-[600px] bg-gradient-to-r from-[#1a1a1d] to-[#4e4e50] overflow-hidden shadow-2xl">
       <Swiper
         modules={[Autoplay, Navigation]}
         autoplay={{

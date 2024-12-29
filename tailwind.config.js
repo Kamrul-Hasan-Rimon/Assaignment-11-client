@@ -4,13 +4,6 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-<<<<<<< HEAD
-  plugins: [
-    require('daisyui'),
-  ],
-  daisyui: {
-    themes: ["light"],
-  },
   theme: {
     extend: {
       colors: {
@@ -21,14 +14,10 @@ export default {
       },
     },
   },
-=======
-
-  theme: {
-    extend: {},
-  },
   plugins: [
     require('daisyui'),
   ],
->>>>>>> 7bc40638d475e70bc801c2ace5178b1769d416b7
-}
-
+  daisyui: {
+    themes: ["light"],
+  },
+};

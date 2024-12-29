@@ -6,12 +6,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBcGm1fSlDzddfM-If_4u5mzesnKnw4nu4",
-  authDomain: "modern-hotel-3e21d.firebaseapp.com",
-  projectId: "modern-hotel-3e21d",
-  storageBucket: "modern-hotel-3e21d.firebasestorage.app",
-  messagingSenderId: "108398299987",
-  appId: "1:108398299987:web:eadc0eff8577f1633defa6"
+  apiKey: import.meta.env.VITE_apiKey,
+  authDomain:import.meta.env.VITE_authDomain,
+  projectId: import.meta.env.VITE_projectId,
+  storageBucket: import.meta.env.VITE_storageBucket,
+  messagingSenderId: import.meta.env.VITE_messagingSenderId,
+  appId: import.meta.env.VITE_appId
 };
 
 // Initialize Firebase
