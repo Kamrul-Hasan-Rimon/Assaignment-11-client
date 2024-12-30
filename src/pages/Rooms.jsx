@@ -7,7 +7,7 @@ const Rooms = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const respone = await axios.get('http://localhost:4000/rooms')
+        const respone = await axios.get(`${import.meta.env.VITE_API}/rooms`)
         console.log(respone.data)
         setRooms(respone.data)
       } catch (error) {
