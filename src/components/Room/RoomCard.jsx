@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Rating from 'react-rating'; // Install this with `npm install react-rating`
+import Rating from 'react-rating';
 
 export default function RoomCard({ rooms }) {
   return (

@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthProvider";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, logout } = useContext(AuthContext)
 
   return (
     <div className="fixed top-0 left-0 z-50 navbar flex justify-between pr-10 bg-gradient-to-r from-[#1a1a1d] via-[#4e4e50] to-[#1a1a1d] p-4 shadow-2xl backdrop-blur-lg border border-gray-700">
@@ -12,11 +14,11 @@ const Navbar = () => {
           className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FFD700] to-[#FF8C00] tracking-wide transform hover:scale-110 hover:rotate-2 transition-all duration-500"
           href="#"
         >
-          ✨LuxeStay 
+          ✨LuxeStay
         </a>
       </div>
 
-     
+
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 space-x-8">
           <li>
