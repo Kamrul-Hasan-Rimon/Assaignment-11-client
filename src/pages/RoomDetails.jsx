@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { useLoaderData, useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Swal from "sweetalert2";
@@ -8,15 +8,31 @@ import axios from "axios";
 
 const RoomDetails = () => {
   const { user } = useContext(AuthContext)
+  const {id} = useParams()
+
   const room = useLoaderData();
+  console.log(room)
   const [showModal, setShowModal] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
+  const [reviews, setReviews] = useState([]);
+
+  // Fetch reviews using Axios
+  useEffect(() => {
+    axios
+      .get(`http://localhost:4000/reviews/${room._id}`)
+      .then((response) => {
+        setReviews(response.data); // Set reviews in state
+      })
+      .catch((error) => {
+        console.error('Error fetching reviews:', error);
+      });
+  }, [room._id]);
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
 
-  const handleBookingConfirm = async () => {
-
+  const handleBookingConfirm = async (e) => {
+    e.preventDefault()
     const guest = {
       name: user.displayName,
       email: user.email,
@@ -26,7 +42,8 @@ const RoomDetails = () => {
     const roomName = room.name
     const pricepernight = room.price
     const bookingDate = selectedDate
-    const bookingInfo = { guest, roomImage, roomName, pricepernight, bookingDate }
+    const roomId = id
+    const bookingInfo = { guest, roomImage, roomName, pricepernight, bookingDate, roomId }
     console.log(bookingInfo)
 
     Swal.fire({
@@ -35,8 +52,6 @@ const RoomDetails = () => {
       icon: "success",
     });
     setShowModal(false);
-
-
     try {
       const response = await axios.post(`${import.meta.env.VITE_API}/myRooms`, bookingInfo);
       console.log(response);
@@ -48,7 +63,6 @@ const RoomDetails = () => {
         icon: "error",
       });
     }
-    
   }
 
   return (
@@ -99,21 +113,20 @@ const RoomDetails = () => {
             <p className="text-lg text-gray-200 leading-relaxed">{room.description}</p>
           </div>
           {/* Reviews */}
-          <div className="p-12 bg-gradient-to-r from-black to-gray-800 shadow-xl rounded-xl transform transition-all duration-300 hover:scale-105 backdrop-blur-md border-2 border-gold">
-            <h3 className="text-4xl font-semibold mb-6 text-white">Reviews</h3>
-            {room.reviews && room.reviews.length > 0 ? (
-              <ul className="space-y-6">
-                {room.reviews.map((review, index) => (
-                  <li
-                    key={index}
-                    className="p-6 bg-gray-100 rounded-lg shadow-lg border border-gray-200 backdrop-blur-sm"
-                  >
-                    <p className="text-gray-700 italic">"{review}"</p>
-                  </li>
-                ))}
-              </ul>
+          <div>
+            <h2>Room Reviews</h2>
+            {reviews.length > 0 ? (
+              reviews.map((review) => (
+                <div key={review._id}>
+                  <p>
+                    <strong>{review.username}</strong>: {review.comment}
+                  </p>
+                  <p>Rating: {review.rating}/5</p>
+                  <p>Date: {new Date(review.timestamp).toLocaleString()}</p>
+                </div>
+              ))
             ) : (
-              <p className="text-lg italic text-gray-400">No reviews available yet.</p>
+              <p>No reviews yet.</p>
             )}
           </div>
         </div>

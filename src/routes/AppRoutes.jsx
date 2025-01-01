@@ -10,16 +10,19 @@ import MyBookings from "../pages/MyBookings";
 import PrivateRoute from "./PrivateRoute";
 import Rooms from "../pages/Rooms";
 import RoomDetails from "../pages/RoomDetails";
+import ReviewModal from "../pages/ReviewModal";
+import NotFound from "../components/Common/NotFound";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
+    errorElement:<NotFound></NotFound>,
     children: [
       {
         path: '/',
         element: <Home></Home>
 
-        
+
       },
       {
         path: '/rooms',
@@ -28,15 +31,15 @@ const router = createBrowserRouter([
       {
         path: '/roomDetails/:id',
         element: <RoomDetails></RoomDetails>,
-        loader:({params})=>fetch(`http://localhost:4000/rooms/${params.id}`)
-        
+        loader: ({ params }) => fetch(`http://localhost:4000/rooms/${params.id}`)
+
       },
       {
         path: '/MyBookings',
         element:
           <PrivateRoute>
             <MyBookings></MyBookings>
-          </PrivateRoute>
+          </PrivateRoute>,
       }
     ]
   },

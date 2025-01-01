@@ -40,6 +40,7 @@ export default function AuthProvider({ children }) {
     setLoading(true);
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      console.log(userCredential)
       return userCredential;
     } catch (error) {
       console.error("Login Error:", error.message);

@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 const Login = () => {
   const { login, googleSignIn, setLoading } = useContext(AuthContext);
   const navigate = useNavigate();
-
+  console.log(googleSignIn)
   const handleSubmit = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -27,7 +27,7 @@ const Login = () => {
       Swal.fire({
         title: "Success!",
         text: "Failed to login.",
-        icon: "error", 
+        icon: "error",
       });
 
     }
@@ -43,6 +43,7 @@ const Login = () => {
       toast.error("Google Sign-In failed:", error.message);
     }
   };
+  console.log(handleGoogleSignIn)
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-black">
@@ -68,6 +69,7 @@ const Login = () => {
               Email Address
             </label>
             <input
+            required
               type="email"
               name="email"
               placeholder="Enter your email"
@@ -84,6 +86,7 @@ const Login = () => {
               Password
             </label>
             <input
+            required
               type="password"
               name="password"
               placeholder="Enter your password"

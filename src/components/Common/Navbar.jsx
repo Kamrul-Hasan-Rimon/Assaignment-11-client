@@ -4,11 +4,15 @@ import { AuthContext } from "../context/AuthProvider";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user, logout } = useContext(AuthContext)
+  const { user, logout } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logout();
+    // Optionally, you can redirect the user after logout using a routing function.
+  };
 
   return (
     <div className="fixed top-0 left-0 z-50 navbar flex justify-between pr-10 bg-gradient-to-r from-[#1a1a1d] via-[#4e4e50] to-[#1a1a1d] p-4 shadow-2xl backdrop-blur-lg border border-gray-700">
-
       <div className="navbar-start">
         <a
           className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FFD700] to-[#FF8C00] tracking-wide transform hover:scale-110 hover:rotate-2 transition-all duration-500"
@@ -17,7 +21,6 @@ const Navbar = () => {
           ✨LuxeStay
         </a>
       </div>
-
 
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 space-x-8">
@@ -69,20 +72,43 @@ const Navbar = () => {
         </ul>
       </div>
 
-
       <div className="navbar-end space-x-4 hidden lg:flex">
-        <Link
-          href="#offers"
-          className="btn px-6 py-2 bg-gradient-to-r from-[#FFD700] to-[#FF8C00] text-black font-bold shadow-[0px_4px_20px_rgba(255,215,0,0.5)] rounded-full hover:scale-110 transition-all duration-500"
-        >
-          Offers
-        </Link>
-        <Link to={'/login'}
-          href="#login"
-          className="btn px-6 py-2 border-2 border-[#FFD700] text-[#FFD700] hover:bg-[#FFD700] hover:text-black font-bold rounded-full hover:scale-110 hover:shadow-[0px_4px_20px_rgba(255,215,0,0.8)] transition-all duration-500"
-        >
-          Login
-        </Link>
+        <div className="dropdown dropdown-end">
+          <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+            <div className="w-10 rounded-full">
+              <img
+                alt=""
+                src={user?.photoURL}/>
+            </div>
+          </div>
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+            <li>
+              <a className="justify-between">
+                Profile
+                <span className="badge">New</span>
+              </a>
+            </li>
+            <li><a>Settings</a></li>
+            <li><a>Logout</a></li>
+          </ul>
+        </div>
+        {user ? (
+          <button
+            onClick={handleLogout}
+            className="btn px-6 py-2 border-2 border-[#FFD700] text-[#FFD700] hover:bg-[#FFD700] hover:text-black font-bold rounded-full hover:scale-110 hover:shadow-[0px_4px_20px_rgba(255,215,0,0.8)] transition-all duration-500"
+          >
+            Logout
+          </button>
+        ) : (
+          <Link
+            to={'/login'}
+            className="btn px-6 py-2 border-2 border-[#FFD700] text-[#FFD700] hover:bg-[#FFD700] hover:text-black font-bold rounded-full hover:scale-110 hover:shadow-[0px_4px_20px_rgba(255,215,0,0.8)] transition-all duration-500"
+          >
+            Login
+          </Link>
+        )}
       </div>
 
       {/* Dropdown for Small Devices */}
@@ -144,12 +170,21 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <Link to={'/login'}
-                  href="#login"
-                  className="btn w-full border-2 border-[#FFD700] text-[#FFD700] hover:bg-[#FFD700] hover:text-black font-bold rounded-lg text-center"
-                >
-                  Login
-                </Link>
+                {user && user?.email ? (
+                  <button
+                    onClick={handleLogout}
+                    className="btn w-full border-2 border-[#FFD700] text-[#FFD700] hover:bg-[#FFD700] hover:text-black font-bold rounded-lg text-center"
+                  >
+                    Logout
+                  </button>
+                ) : (
+                  <Link
+                    to={'/login'}
+                    className="btn w-full border-2 border-[#FFD700] text-[#FFD700] hover:bg-[#FFD700] hover:text-black font-bold rounded-lg text-center"
+                  >
+                    Login
+                  </Link>
+                )}
               </li>
             </ul>
           </div>
