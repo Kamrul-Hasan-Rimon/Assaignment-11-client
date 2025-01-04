@@ -5,21 +5,23 @@ import "react-datepicker/dist/react-datepicker.css";
 import Swal from "sweetalert2";
 import { AuthContext } from "../components/context/AuthProvider";
 import axios from "axios";
+import { useAxiosSecure } from "../hook/useAxiosSecure";
 
 const RoomDetails = () => {
   const { user } = useContext(AuthContext)
-  const {id} = useParams()
+  const { id } = useParams()
 
   const room = useLoaderData();
   console.log(room)
   const [showModal, setShowModal] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [reviews, setReviews] = useState([]);
+  const myaxios = useAxiosSecure()
 
   // Fetch reviews using Axios
   useEffect(() => {
-    axios
-      .get(`http://localhost:4000/reviews/${room._id}`)
+    myaxios
+      .get(`/reviews/${room._id}`)
       .then((response) => {
         setReviews(response.data); // Set reviews in state
       })
@@ -53,7 +55,7 @@ const RoomDetails = () => {
     });
     setShowModal(false);
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API}/myRooms`, bookingInfo);
+      const response = await myaxios.post(`/myRooms`, bookingInfo);
       console.log(response);
     } catch (error) {
       console.error(error.response || error.message);

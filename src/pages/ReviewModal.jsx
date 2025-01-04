@@ -8,6 +8,7 @@ const ReviewModal = ({
     roomId,
     userEmail,
     username,
+    photoURL,
     isReviewModalOpen,
     setIsReviewModalOpen,
 }) => {
@@ -38,6 +39,7 @@ const ReviewModal = ({
             roomId,
             userEmail,
             username,
+            photoURL,
             rating,
             comment,
             timestamp,

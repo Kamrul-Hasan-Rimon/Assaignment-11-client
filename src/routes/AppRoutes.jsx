@@ -16,7 +16,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
-    errorElement:<NotFound></NotFound>,
+    errorElement: <NotFound></NotFound>,
     children: [
       {
         path: '/',
@@ -30,7 +30,10 @@ const router = createBrowserRouter([
       },
       {
         path: '/roomDetails/:id',
-        element: <RoomDetails></RoomDetails>,
+        element:
+          <PrivateRoute>
+            <RoomDetails></RoomDetails>
+          </PrivateRoute>,
         loader: ({ params }) => fetch(`http://localhost:4000/rooms/${params.id}`)
 
       },

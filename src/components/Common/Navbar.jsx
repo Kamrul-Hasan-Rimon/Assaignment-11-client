@@ -14,12 +14,13 @@ const Navbar = () => {
   return (
     <div className="fixed top-0 left-0 z-50 navbar flex justify-between pr-10 bg-gradient-to-r from-[#1a1a1d] via-[#4e4e50] to-[#1a1a1d] p-4 shadow-2xl backdrop-blur-lg border border-gray-700">
       <div className="navbar-start">
-        <a
+        <Link
+          to="/"
           className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FFD700] to-[#FF8C00] tracking-wide transform hover:scale-110 hover:rotate-2 transition-all duration-500"
-          href="#"
         >
           ✨LuxeStay
-        </a>
+        </Link>
+
       </div>
 
       <div className="navbar-center hidden lg:flex">
@@ -77,21 +78,15 @@ const Navbar = () => {
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
               <img
-                alt=""
-                src={user?.photoURL}/>
+                alt={user?.displayName}
+                src={user?.photoURL} />
             </div>
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-            <li>
-              <a className="justify-between">
-                Profile
-                <span className="badge">New</span>
-              </a>
-            </li>
-            <li><a>Settings</a></li>
-            <li><a>Logout</a></li>
+            className="menu menu-sm dropdown-content bg-gradient-to-r from-[#1a1a1d] via-[#4e4e50] to-[#1a1a1d] text-white rounded-box z-[1] mt-3 w-52 p-2 shadow">
+      
+            <li className="text-center">{user?.displayName}</li>
           </ul>
         </div>
         {user ? (

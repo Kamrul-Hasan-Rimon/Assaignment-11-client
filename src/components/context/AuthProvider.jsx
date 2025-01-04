@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -7,7 +7,8 @@ import {
   onAuthStateChanged,
   signOut,
 } from "firebase/auth";
-import auth from '../firebase/firebaseConfig';
+import auth from "../firebase/firebaseConfig";
+import axios from "axios";
 
 export const AuthContext = createContext();
 
@@ -16,11 +17,39 @@ export default function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      setLoading(false);
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser?.email) {
+        setUser(currentUser);
+        try {
+          const userPayload = { email: currentUser.email };
+          const res = await axios.post(
+            `${import.meta.env.VITE_API}/jwt`,
+            userPayload,
+            { withCredentials: true }
+          );
+          console.log("JWT Token acquired:", res.data);
+        } catch (error) {
+          console.error("Error fetching JWT token:", error);
+        } finally {
+          setLoading(false);
+        }
+      } else {
+        setUser(null);
+        try {
+          await axios.post(
+            `${import.meta.env.VITE_API}/logout`,
+            {},
+            { withCredentials: true }
+          );
+        } catch (error) {
+          console.error("Error during logout:", error);
+        } finally {
+          setLoading(false);
+        }
+      }
     });
-    return () => unsubscribe();
+
+    return () => unsubscribe(); // Cleanup subscription
   }, []);
 
   const register = async (email, password) => {
@@ -40,7 +69,7 @@ export default function AuthProvider({ children }) {
     setLoading(true);
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      console.log(userCredential)
+      console.log("Login Success:", userCredential);
       return userCredential;
     } catch (error) {
       console.error("Login Error:", error.message);
@@ -65,15 +94,30 @@ export default function AuthProvider({ children }) {
   const googleSignIn = async () => {
     setLoading(true);
     const provider = new GoogleAuthProvider();
-
+    try {
       const result = await signInWithPopup(auth, provider);
+      console.log("Google Sign-In Success:", result);
       return result;
-      
-    
+    } catch (error) {
+      console.error("Google Sign-In Error:", error.message);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, logout, login, setLoading, register, googleSignIn }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        loading,
+        register,
+        login,
+        logout,
+        googleSignIn,
+        setLoading,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
