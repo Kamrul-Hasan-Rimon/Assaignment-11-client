@@ -12,6 +12,7 @@ import Rooms from "../pages/Rooms";
 import RoomDetails from "../pages/RoomDetails";
 import ReviewModal from "../pages/ReviewModal";
 import NotFound from "../components/Common/NotFound";
+import About from "../components/Common/About";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: '/rooms',
         element: <Rooms></Rooms>
+      },
+      {
+        path: '/about',
+        element: <About></About>
       },
       {
         path: '/roomDetails/:id',

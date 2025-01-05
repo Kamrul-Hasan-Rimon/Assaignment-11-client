@@ -26,7 +26,7 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1 space-x-8">
           <li>
             <Link
-              href="#home"
+              
               className="text-lg font-semibold text-white tracking-wider transition-all duration-300 relative group"
             >
               Home
@@ -43,8 +43,7 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link
-              href="#services"
+            <Link to={'/about'}
               className="text-lg font-semibold text-white tracking-wider transition-all duration-300 relative group"
             >
               Services
@@ -52,8 +51,7 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link
-              href="#about"
+            <Link to={'/about'}
               className="text-lg font-semibold text-white tracking-wider transition-all duration-300 relative group"
             >
               About
