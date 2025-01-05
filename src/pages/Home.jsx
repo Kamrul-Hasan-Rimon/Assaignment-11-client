@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import Banner from '../components/Home/Banner'
-import LocationMap from '../components/Home/LocationMap'
 import FeaturedRooms from '../components/Home/FeaturedRooms'
 import ExclusiveOffers from '../components/Home/ExclusiveOffers'
 import GuestTestimonials from '../components/Home/GuestTestimonials'
 import SpecialOffersModal from '../components/Home/SpecialOffersModal'
+import LocationMap from '../components/Home/LocationMap'
 
 export default function Home() {
 
@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <>
       <Banner></Banner>
-      {/* <LocationMap></LocationMap> */}
+      <LocationMap></LocationMap>
       <SpecialOffersModal></SpecialOffersModal>
       <FeaturedRooms></FeaturedRooms>
       <ExclusiveOffers></ExclusiveOffers>

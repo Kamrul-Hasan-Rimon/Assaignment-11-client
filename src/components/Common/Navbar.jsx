@@ -8,7 +8,6 @@ const Navbar = () => {
 
   const handleLogout = () => {
     logout();
-    // Optionally, you can redirect the user after logout using a routing function.
   };
 
   return (

@@ -135,7 +135,7 @@ const Login = () => {
           </button>
         </div>
 
-        {/* Links Section */}
+    
         <div className="mt-6 text-center">
           <Link
             href="#"

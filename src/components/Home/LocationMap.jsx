@@ -12,7 +12,7 @@ const defaultIcon = L.icon({
   iconUrl: markerIcon,
   iconRetinaUrl: markerRetina,
   shadowUrl: markerShadow,
-  iconSize: [35, 50], // Larger, luxurious marker size
+  iconSize: [35, 50],
   iconAnchor: [17, 50],
   popupAnchor: [0, -45],
   shadowSize: [50, 50],
@@ -21,7 +21,7 @@ const defaultIcon = L.icon({
 L.Marker.prototype.options.icon = defaultIcon;
 
 const LocationMap = () => {
-  const position = [23.8103, 90.4125]; // Replace this with your hotel's latitude and longitude
+  const position = [23.8103, 90.4125];
 
   return (
     <div className="location-section py-12 bg-gradient-to-r from-[#1a1a1d] to-[#4e4e50] text-white">
@@ -30,7 +30,7 @@ const LocationMap = () => {
           Visit Us in the Heart of the City
         </h2>
         <p className="mt-4 text-lg max-w-2xl mx-auto">
-          Nestled in the vibrant heart of the city, our hotel is a haven of elegance and comfort. 
+          Nestled in the vibrant heart of the city, our hotel is a haven of elegance and comfort.
           Experience seamless luxury and unmatched convenience with easy access to all major attractions.
         </p>
       </div>

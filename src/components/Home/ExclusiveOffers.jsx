@@ -50,7 +50,7 @@ const ExclusiveOffers = () => {
           {exclusiveOffers.map((offer) => (
             <div
               key={offer.id}
-              className="offer-card bg-gray-900 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform "
+              className="offer-card bg-gray-900 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform flex flex-col"
             >
               {/* Offer Image */}
               <div className="relative h-64 overflow-hidden">
@@ -61,21 +61,25 @@ const ExclusiveOffers = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 hover:opacity-60 transition-opacity duration-500"></div>
                 <div className="absolute top-4 right-4 bg-gradient-to-r from-yellow-400 to-yellow-600 text-white px-4 py-2 rounded-lg text-sm font-bold shadow-md">
-                {offer.offer}
+                  {offer.offer}
                 </div>
               </div>
 
               {/* Offer Details */}
-              <div className="p-8">
+              <div className="p-8 flex-grow">
                 <h3 className="text-3xl font-semibold text-white mb-4">
                   {offer.title}
                 </h3>
                 <p className="text-gray-400 text-lg mb-6">{offer.description}</p>
-                <span className="block text-xl text-gold font-semibold mb-4">
+              </div>
+
+              {/* Price and Button Section */}
+              <div className="p-8 pt-0 mt-auto flex flex-col justify-between items-center">
+                <span className="text-2xl text-gold mb-6 font-bold">
                   {offer.price}
                 </span>
                 <button
-                  className="w-full px-6 py-3 text-lg font-medium bg-gradient-to-r from-yellow-400 to-yellow-600 text-white rounded-lg shadow-lg hover:shadow-2xl hover:from-yellow-500 hover:to-yellow-700 transition duration-300"
+                  className="px-6 py-3 text-lg font-medium bg-gradient-to-r from-yellow-400 to-yellow-600 text-white rounded-lg shadow-lg hover:shadow-2xl hover:from-yellow-500 hover:to-yellow-700 transition duration-300"
                 >
                   Book Now
                 </button>

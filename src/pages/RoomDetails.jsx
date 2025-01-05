@@ -4,20 +4,18 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Swal from "sweetalert2";
 import { AuthContext } from "../components/context/AuthProvider";
-import axios from "axios";
 import { useAxiosSecure } from "../hook/useAxiosSecure";
 
 const RoomDetails = () => {
   const { user } = useContext(AuthContext)
   const { id } = useParams()
-
   const room = useLoaderData();
   console.log(room)
   const [showModal, setShowModal] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [reviews, setReviews] = useState([]);
   const myaxios = useAxiosSecure()
-
+console.log(reviews)
   // Fetch reviews using Axios
   useEffect(() => {
     myaxios
@@ -115,22 +113,39 @@ const RoomDetails = () => {
             <p className="text-lg text-gray-200 leading-relaxed">{room.description}</p>
           </div>
           {/* Reviews */}
-          <div>
-            <h2>Room Reviews</h2>
+          <div className="p-12 bg-gradient-to-r from-black to-gray-800 shadow-xl rounded-xl transform transition-all duration-300 hover:scale-105 backdrop-blur-md border-2 border-gold">
+            <h3 className="text-4xl font-semibold mb-6 text-white">Room Reviews</h3>
             {reviews.length > 0 ? (
-              reviews.map((review) => (
-                <div key={review._id}>
-                  <p>
-                    <strong>{review.username}</strong>: {review.comment}
-                  </p>
-                  <p>Rating: {review.rating}/5</p>
-                  <p>Date: {new Date(review.timestamp).toLocaleString()}</p>
-                </div>
-              ))
+              <div className="space-y-6">
+                {reviews.map((review) => (
+                  <div
+                    key={review._id}
+                    className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-lg shadow-lg"
+                  >
+                    <div className="flex items-center space-x-4 mb-4">
+                      <img
+                        src={review.photoURL}
+                        alt={review.username}
+                        className="w-12 h-12 rounded-full object-cover border-2 border-gold"
+                      />
+                      <div>
+                        <p className="text-lg font-semibold text-white">{review.username}</p>
+                        <p className="text-sm text-gray-400">{new Date(review.timestamp).toLocaleDateString()}</p>
+                      </div>
+                    </div>
+                    <p className="text-gray-300 mb-2">"{review.comment}"</p>
+                    <div className="flex items-center">
+                      <span className="text-yellow-400 text-lg font-semibold mr-2">{review.rating}</span>
+                      <i className="fas fa-star text-yellow-400"></i>
+                    </div>
+                  </div>
+                ))}
+              </div>
             ) : (
-              <p>No reviews yet.</p>
+              <p className="text-gray-400">No reviews yet. Be the first to review this room!</p>
             )}
           </div>
+
         </div>
       </div>
 

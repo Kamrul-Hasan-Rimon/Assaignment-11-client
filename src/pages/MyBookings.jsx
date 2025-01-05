@@ -8,12 +8,6 @@ import ReviewModal from "./ReviewModal";
 import { useAxiosSecure } from "../hook/useAxiosSecure";
 
 const MyBookings = () => {
-  const calculateDateDifference = (bookingDate) => {
-    const currentDate = new Date();
-    const bookingDateObj = new Date(bookingDate);
-    const differenceInTime = bookingDateObj.getTime() - currentDate.getTime();
-    return differenceInTime / (1000 * 3600 * 24);
-  };
   const { user } = useContext(AuthContext);
   const [bookings, setBookings] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,7 +15,8 @@ const MyBookings = () => {
   const [selectedBookingId, setSelectedBookingId] = useState(null);
   const [roomId, setRoomId] = useState(null);
   const [newDate, setNewDate] = useState(null);
-  const myaxios = useAxiosSecure()
+  const myaxios = useAxiosSecure();
+
   // Fetch bookings
   const fetchData = async () => {
     try {
@@ -39,18 +34,7 @@ const MyBookings = () => {
   }, [user?.email]);
 
   // Handle Cancel Booking
-  const handleCancel = async (bookingId, bookingDate) => {
-    const dateDifference = calculateDateDifference(bookingDate);
-
-    if (dateDifference > 1) {
-      Swal.fire({
-        title: "Cannot Cancel",
-        text: "You can only cancel your booking up to 1 day before the booked date.",
-        icon: "error",
-      });
-      return;
-    }
-
+  const handleCancel = async (bookingId) => {
     const result = await Swal.fire({
       title: "Are you sure?",
       text: "Do you want to cancel this booking? This action cannot be undone.",
@@ -73,6 +57,7 @@ const MyBookings = () => {
       }
     }
   };
+
   // Open Update Date Modal
   const handleUpdateDate = (bookingId) => {
     setSelectedBookingId(bookingId);
@@ -88,7 +73,7 @@ const MyBookings = () => {
 
     try {
       const response = await myaxios.put(`/myRooms/${selectedBookingId}`, {
-        newDate
+        newDate,
       });
       console.log(response);
       Swal.fire("Updated!", "Booking date updated successfully.", "success");
@@ -123,49 +108,44 @@ const MyBookings = () => {
             </thead>
             <tbody>
               {bookings.length > 0 ? (
-                bookings.map((booking, index) => {
-                  const canCancel = calculateDateDifference(booking.bookingDate) <= 1;
-
-                  return (
-                    <tr
-                      key={booking._id}
-                      className={`${index % 2 === 0 ? "bg-white/20" : "bg-white/10"
-                        } hover:bg-white/30 transition duration-300 backdrop-blur-sm`}
-                    >
-                      <td className="px-6 py-4">
-                        <img
-                          src={booking.roomImage}
-                          alt={booking.roomName}
-                          className="w-16 h-16 object-cover rounded-full shadow-lg border border-gold"
-                        />
-                      </td>
-                      <td className="px-6 py-4 text-gray-200 font-medium">{booking.roomName}</td>
-                      <td className="px-6 py-4 text-gold font-semibold">${booking.pricepernight} / night</td>
-                      <td className="px-6 py-4 text-gray-300">{booking.newDate || booking.bookingDate}</td>
-                      <td className="px-6 py-4 text-center">
-                        <button
-                          onClick={() => handleCancel(booking._id, booking.bookingDate)}
-                          disabled={!canCancel}
-                          className={`px-5 py-2 mb-2 ${!canCancel ? 'bg-gray-500 cursor-not-allowed' : 'bg-gradient-to-r from-[#ff416c] to-[#ff4b2b]'} text-white font-medium rounded-lg shadow-md hover:shadow-lg hover:from-[#ff4b2b] hover:to-[#ff416c] transition duration-300 mx-1`}
-                        >
-                          Cancel
-                        </button>
-                        <button
-                          onClick={() => handleUpdateDate(booking._id)}
-                          className="px-5 mb-2 py-2 bg-gradient-to-r from-[#6a11cb] to-[#2575fc] text-white font-medium rounded-lg shadow-md hover:shadow-lg hover:from-[#2575fc] hover:to-[#6a11cb] transition duration-300 mx-1"
-                        >
-                          Update Date
-                        </button>
-                        <button
-                          onClick={() => handleReview(booking.roomId)}
-                          className="px-5 py-2 bg-gradient-to-r from-[#FFD700] via-[#FF8C00] to-[#FFD700] text-white font-medium rounded-lg shadow-md hover:shadow-xl transition duration-300 mx-1"
-                        >
-                          Review
-                        </button>
-                      </td>
-                    </tr>
-                  );
-                })
+                bookings.map((booking, index) => (
+                  <tr
+                    key={booking._id}
+                    className={`${index % 2 === 0 ? "bg-white/20" : "bg-white/10"
+                      } hover:bg-white/30 transition duration-300 backdrop-blur-sm`}
+                  >
+                    <td className="px-6 py-4">
+                      <img
+                        src={booking.roomImage}
+                        alt={booking.roomName}
+                        className="w-16 h-16 object-cover rounded-full shadow-lg border border-gold"
+                      />
+                    </td>
+                    <td className="px-6 py-4 text-gray-200 font-medium">{booking.roomName}</td>
+                    <td className="px-6 py-4 text-gold font-semibold">${booking.pricepernight} / night</td>
+                    <td className="px-6 py-4 text-gray-300">{booking.newDate || booking.bookingDate}</td>
+                    <td className="px-6 py-4 text-center">
+                      <button
+                        onClick={() => handleCancel(booking._id)}
+                        className="px-5 py-2 mb-2 bg-gradient-to-r from-[#ff416c] to-[#ff4b2b] text-white font-medium rounded-lg shadow-md hover:shadow-lg hover:from-[#ff4b2b] hover:to-[#ff416c] transition duration-300 mx-1"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        onClick={() => handleUpdateDate(booking._id)}
+                        className="px-5 mb-2 py-2 bg-gradient-to-r from-[#6a11cb] to-[#2575fc] text-white font-medium rounded-lg shadow-md hover:shadow-lg hover:from-[#2575fc] hover:to-[#6a11cb] transition duration-300 mx-1"
+                      >
+                        Update Date
+                      </button>
+                      <button
+                        onClick={() => handleReview(booking.roomId)}
+                        className="px-5 py-2 bg-gradient-to-r from-[#FFD700] via-[#FF8C00] to-[#FFD700] text-white font-medium rounded-lg shadow-md hover:shadow-xl transition duration-300 mx-1"
+                      >
+                        Review
+                      </button>
+                    </td>
+                  </tr>
+                ))
               ) : (
                 <tr>
                   <td colSpan="5" className="px-6 py-4 text-center text-gray-300 font-semibold text-xl">

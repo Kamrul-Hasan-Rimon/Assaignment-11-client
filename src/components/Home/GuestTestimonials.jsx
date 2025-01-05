@@ -6,13 +6,12 @@ const GuestTestimonials = () => {
 
     useEffect(() => {
         axios
-            .get("http://localhost:4000/reviews") // Replace with your API endpoint
+            .get("http://localhost:4000/reviews")
             .then((response) => {
-                // Sort reviews in descending order by timestamp
                 const sortedReviews = response.data.sort(
                     (a, b) => new Date(b.timestamp) - new Date(a.timestamp)
                 );
-                setReviews(sortedReviews); // Set sorted reviews
+                setReviews(sortedReviews); 
             })
             .catch((error) => {
                 console.error("Error fetching reviews:", error);

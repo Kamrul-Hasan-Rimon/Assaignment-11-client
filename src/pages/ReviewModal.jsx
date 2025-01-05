@@ -3,6 +3,7 @@ import "tailwindcss/tailwind.css"; // Ensure Tailwind CSS is applied
 import ReactStars from "react-stars"; // Import react-rating-stars-component
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useAxiosSecure } from "../hook/useAxiosSecure";
 
 const ReviewModal = ({
     roomId,
@@ -15,6 +16,7 @@ const ReviewModal = ({
     const [rating, setRating] = useState(0); // State for rating
     const [comment, setComment] = useState(""); // State for comment
     const timestamp = new Date().toLocaleString(); // Generate current timestamp
+    const myaxios = useAxiosSecure()
 
     const handleRatingChange = (newRating) => {
         setRating(newRating);
@@ -46,8 +48,8 @@ const ReviewModal = ({
         };
 
         // Submit review via Axios
-        axios
-            .post("http://localhost:4000/reviews", review)
+        myaxios
+            .post("/reviews", review)
             .then((response) => {
                 Swal.fire({
                     icon: "success",

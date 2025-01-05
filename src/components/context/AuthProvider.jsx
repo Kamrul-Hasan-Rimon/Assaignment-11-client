@@ -49,7 +49,7 @@ export default function AuthProvider({ children }) {
       }
     });
 
-    return () => unsubscribe(); // Cleanup subscription
+    return () => unsubscribe(); 
   }, []);
 
   const register = async (email, password) => {
