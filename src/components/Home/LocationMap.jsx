@@ -1,27 +1,76 @@
-import React from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import L from "leaflet";
-
-// Fix for missing marker icons
-import markerIcon from "leaflet/dist/images/marker-icon.png";
-import markerShadow from "leaflet/dist/images/marker-shadow.png";
-import markerRetina from "leaflet/dist/images/marker-icon-2x.png";
-
-const defaultIcon = L.icon({
-  iconUrl: markerIcon,
-  iconRetinaUrl: markerRetina,
-  shadowUrl: markerShadow,
-  iconSize: [35, 50],
-  iconAnchor: [17, 50],
-  popupAnchor: [0, -45],
-  shadowSize: [50, 50],
-});
-
-L.Marker.prototype.options.icon = defaultIcon;
+import React, { useEffect, useRef } from "react";
+import { Map, View } from "ol";
+import TileLayer from "ol/layer/Tile";
+import OSM from "ol/source/OSM";
+import VectorLayer from "ol/layer/Vector";
+import VectorSource from "ol/source/Vector";
+import { Icon, Style } from "ol/style";
+import { Feature } from "ol";
+import Point from "ol/geom/Point";
+import { fromLonLat } from "ol/proj";
+import "ol/ol.css";
 
 const LocationMap = () => {
-  const position = [23.8103, 90.4125];
+  const mapRef = useRef(null);
+
+  useEffect(() => {
+    const mapCenter = fromLonLat([90.4125, 23.8103]); // Dhaka coordinates
+
+    // Create a vector source and layer for pins
+    const vectorSource = new VectorSource();
+
+    // Add pins (markers) to the vector source
+    const locations = [
+      {
+        coordinates: [90.4125, 23.8103], // Dhaka
+        title: "The Grand Luxe Hotel",
+      },
+      {
+        coordinates: [90.4280, 23.8040], // Nearby location
+        title: "Luxury Spa & Resort",
+      },
+    ];
+
+    locations.forEach((location) => {
+      const pin = new Feature({
+        geometry: new Point(fromLonLat(location.coordinates)),
+        title: location.title,
+      });
+
+      // Style the pin (custom marker icon)
+      pin.setStyle(
+        new Style({
+          image: new Icon({
+            src: "https://cdn-icons-png.flaticon.com/512/684/684908.png", // Custom pin icon URL
+            scale: 0.09, // Resize the icon
+          }),
+        })
+      );
+
+      vectorSource.addFeature(pin);
+    });
+
+    const vectorLayer = new VectorLayer({
+      source: vectorSource,
+    });
+
+    // Create and initialize the map
+    const map = new Map({
+      target: mapRef.current,
+      layers: [
+        new TileLayer({
+          source: new OSM(), // OpenStreetMap base layer
+        }),
+        vectorLayer, // Add the vector layer with pins
+      ],
+      view: new View({
+        center: mapCenter,
+        zoom: 14,
+      }),
+    });
+
+    return () => map.setTarget(null); // Cleanup the map on unmount
+  }, []);
 
   return (
     <div className="location-section py-12 bg-gradient-to-r from-[#1a1a1d] to-[#4e4e50] text-white">
@@ -34,29 +83,11 @@ const LocationMap = () => {
           Experience seamless luxury and unmatched convenience with easy access to all major attractions.
         </p>
       </div>
-      <div className="map-container mt-10 rounded-lg overflow-hidden shadow-2xl mx-auto" style={{ height: "500px", width: "90%" }}>
-        <MapContainer center={position} zoom={14} scrollWheelZoom={false} style={{ height: "100%", width: "100%" }}>
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          />
-          <Marker position={position}>
-            <Popup>
-              <div className="text-black">
-                <h3 className="font-bold text-lg">The Grand Luxe Hotel</h3>
-                <p>Your gateway to luxury living.</p>
-                <a
-                  href="https://maps.google.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-500 underline hover:text-blue-700"
-                >
-                  Get Directions
-                </a>
-              </div>
-            </Popup>
-          </Marker>
-        </MapContainer>
+      <div
+        className="map-container mt-10 rounded-lg overflow-hidden shadow-2xl mx-auto"
+        style={{ height: "500px", width: "90%" }}
+      >
+        <div ref={mapRef} style={{ height: "100%", width: "100%" }}></div>
       </div>
     </div>
   );
