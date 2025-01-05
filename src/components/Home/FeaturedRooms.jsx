@@ -1,6 +1,4 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-
 const featuredRooms = [
   {
     id: 1,
@@ -59,7 +57,6 @@ const featuredRooms = [
 ];
 
 const FeaturedRooms = () => {
-  const navigate = useNavigate();
 
   return (
     <section className="featured-rooms py-20 bg-gradient-to-r from-[#1a1a1d] to-[#4e4e50] text-white">
@@ -103,12 +100,6 @@ const FeaturedRooms = () => {
                 <p className="text-gray-600 mb-6 text-base lg:text-lg">
                   {room.description}
                 </p>
-                <button
-                  onClick={() => navigate(room.link)}
-                  className="w-full px-6 py-3 text-lg font-medium bg-gradient-to-r from-yellow-400 to-yellow-600 text-white rounded-lg shadow-lg hover:shadow-2xl hover:from-yellow-500 hover:to-yellow-700 transition duration-300"
-                >
-                  Book Now
-                </button>
               </div>
             </div>
           ))}

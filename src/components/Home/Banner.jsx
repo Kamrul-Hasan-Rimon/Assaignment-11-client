@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   return (
@@ -33,12 +34,12 @@ const Banner = () => {
               <p className="mt-4 text-lg font-medium">
                 Discover the most exquisite rooms designed for your comfort and style.
               </p>
-              <a
-                href="#rooms"
+              <Link
+                to={'/rooms'}
                 className="btn mt-6 px-8 py-3 bg-gradient-to-r from-[#FFD700] to-[#FF8C00] text-black font-bold shadow-[0px_4px_20px_rgba(255,215,0,0.5)] rounded-full hover:scale-110 transition-all duration-500"
               >
                 Explore Rooms
-              </a>
+              </Link>
             </div>
           </div>
         </SwiperSlide>
@@ -59,12 +60,12 @@ const Banner = () => {
               <p className="mt-4 text-lg font-medium">
                 Immerse yourself in a world of elegance and exceptional service.
               </p>
-              <a
-                href="#rooms"
+              <Link
+                to={'/rooms'}
                 className="btn mt-6 px-8 py-3 bg-gradient-to-r from-[#FFD700] to-[#FF8C00] text-black font-bold shadow-[0px_4px_20px_rgba(255,215,0,0.5)] rounded-full hover:scale-110 transition-all duration-500"
               >
                 Explore Rooms
-              </a>
+              </Link>
             </div>
           </div>
         </SwiperSlide>
@@ -85,12 +86,12 @@ const Banner = () => {
               <p className="mt-4 text-lg font-medium">
                 Book your stay today and enjoy a one-of-a-kind luxurious experience.
               </p>
-              <a
-                href="#rooms"
+              <Link
+                to={'/rooms'}
                 className="btn mt-6 px-8 py-3 bg-gradient-to-r from-[#FFD700] to-[#FF8C00] text-black font-bold shadow-[0px_4px_20px_rgba(255,215,0,0.5)] rounded-full hover:scale-110 transition-all duration-500"
               >
                 Explore Rooms
-              </a>
+              </Link>
             </div>
           </div>
         </SwiperSlide>

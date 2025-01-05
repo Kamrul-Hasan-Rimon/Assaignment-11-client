@@ -46,14 +46,6 @@ const Navbar = () => {
             <Link to={'/about'}
               className="text-lg font-semibold text-white tracking-wider transition-all duration-300 relative group"
             >
-              Services
-              <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-gradient-to-r from-[#FFD700] to-[#FF8C00] group-hover:w-full transition-all duration-500"></span>
-            </Link>
-          </li>
-          <li>
-            <Link to={'/about'}
-              className="text-lg font-semibold text-white tracking-wider transition-all duration-300 relative group"
-            >
               About
               <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-gradient-to-r from-[#FFD700] to-[#FF8C00] group-hover:w-full transition-all duration-500"></span>
             </Link>
@@ -139,12 +131,7 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <Link href="#services" className="text-white">
-                  Services
-                </Link>
-              </li>
-              <li>
-                <Link href="#about" className="text-white">
+                <Link to={'/about'} className="text-white">
                   About
                 </Link>
               </li>

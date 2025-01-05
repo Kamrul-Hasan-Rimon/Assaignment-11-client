@@ -78,11 +78,6 @@ const ExclusiveOffers = () => {
                 <span className="text-2xl text-gold mb-6 font-bold">
                   {offer.price}
                 </span>
-                <button
-                  className="px-6 py-3 text-lg font-medium bg-gradient-to-r from-yellow-400 to-yellow-600 text-white rounded-lg shadow-lg hover:shadow-2xl hover:from-yellow-500 hover:to-yellow-700 transition duration-300"
-                >
-                  Book Now
-                </button>
               </div>
             </div>
           ))}
