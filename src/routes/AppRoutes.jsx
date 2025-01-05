@@ -39,7 +39,7 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <RoomDetails></RoomDetails>
           </PrivateRoute>,
-        loader: ({ params }) => fetch(`http://localhost:4000/rooms/${params.id}`)
+        loader: ({ params }) => fetch(`https://modern-hotel-server.vercel.app/rooms/${params.id}`)
 
       },
       {

@@ -6,7 +6,7 @@ const GuestTestimonials = () => {
 
     useEffect(() => {
         axios
-            .get("http://localhost:4000/reviews")
+            .get("https://modern-hotel-server.vercel.app/reviews")
             .then((response) => {
                 const sortedReviews = response.data.sort(
                     (a, b) => new Date(b.timestamp) - new Date(a.timestamp)
