@@ -22,12 +22,11 @@ export default function AuthProvider({ children }) {
         setUser(currentUser);
         try {
           const userPayload = { email: currentUser.email };
-          const res = await axios.post(
+          await axios.post(
             `${import.meta.env.VITE_API}/jwt`,
             userPayload,
             { withCredentials: true }
           );
-          console.log("JWT Token acquired:", res.data);
         } catch (error) {
           console.error("Error fetching JWT token:", error);
         } finally {
@@ -69,7 +68,6 @@ export default function AuthProvider({ children }) {
     setLoading(true);
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      console.log("Login Success:", userCredential);
       return userCredential;
     } catch (error) {
       console.error("Login Error:", error.message);
@@ -96,7 +94,6 @@ export default function AuthProvider({ children }) {
     const provider = new GoogleAuthProvider();
     try {
       const result = await signInWithPopup(auth, provider);
-      console.log("Google Sign-In Success:", result);
       return result;
     } catch (error) {
       console.error("Google Sign-In Error:", error.message);

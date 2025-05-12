@@ -41,14 +41,14 @@ const Register = () => {
         text: "Successfully Register.",
         icon: "success"
       });
-      
+
     } catch (error) {
       Swal.fire({
         title: "Success!",
         text: "Failed to register. Please try again.",
-        icon: "error", 
+        icon: "error",
       });
-      
+
     }
   };
 

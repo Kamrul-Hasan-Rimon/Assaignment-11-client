@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react"; // Import useContext
+import { ThemeContext } from "../context/ThemeProvider"; // Import ThemeContext
 
-const exclusiveOffers = [
+const exclusiveOffersData = [ // Renamed to avoid conflict
   {
     id: 1,
     title: "Romantic Escape Package",
@@ -31,15 +32,38 @@ const exclusiveOffers = [
 ];
 
 const ExclusiveOffers = () => {
+  const { darkMode } = useContext(ThemeContext); // Get darkMode state
+
+  // Conditional classes based on theme
+  const sectionClasses = darkMode
+    ? "bg-gradient-to-r from-[#1a1a1d] to-[#4e4e50]" // Dark mode background
+    : "bg-gray-100"; // Light mode background (e.g., light gray)
+
+  const headerTextClass = darkMode ? "text-gray-300" : "text-gray-700";
+  const cardBgClass = darkMode ? "bg-gray-900" : "bg-white border border-gray-200";
+  const cardTitleClass = darkMode ? "text-white" : "text-gray-800"; // Darker text for light mode titles
+  const cardDescriptionClass = darkMode ? "text-gray-400" : "text-gray-600";
+  // Assuming 'text-gold' is defined globally and looks good on both light and dark.
+  // If not, you might need a conditional class for it too.
+  // For example: const priceTextClass = darkMode ? "text-gold" : "text-yellow-600";
+
+  // The main title "Exclusive Offers" uses "text-gold". Let's assume this class is styled
+  // to look good on both backgrounds or is a specific brand color.
+  // If you want the gradient title like other sections:
+  // const mainTitleClass = "text-6xl font-bold tracking-wide mb-6 bg-gradient-to-r from-[#FFD700] to-[#FF8C00] text-transparent bg-clip-text";
+  // Otherwise, keep as "text-gold" and ensure it's styled appropriately.
+  const mainTitleClass = "text-6xl font-bold tracking-wide mb-6 text-gold";
+
+
   return (
-    <section className="exclusive-offers bg-gradient-to-r from-[#1a1a1d] to-[#4e4e50] py-24">
+    <section className={`exclusive-offers py-24 ${sectionClasses}`}>
       <div className="container mx-auto px-8 lg:px-16">
         {/* Header Section */}
         <div className="text-center mb-16">
-          <h2 className="text-6xl font-bold text-gold tracking-wide mb-6">
+          <h2 className={mainTitleClass}>
             Exclusive Offers
           </h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          <p className={`text-xl max-w-2xl mx-auto ${headerTextClass}`}>
             Discover our exclusive packages, tailored for an unforgettable
             experience.
           </p>
@@ -47,10 +71,10 @@ const ExclusiveOffers = () => {
 
         {/* Offer Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-          {exclusiveOffers.map((offer) => (
+          {exclusiveOffersData.map((offer) => (
             <div
               key={offer.id}
-              className="offer-card bg-gray-900 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform flex flex-col"
+              className={`offer-card ${cardBgClass} rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform flex flex-col`}
             >
               {/* Offer Image */}
               <div className="relative h-64 overflow-hidden">
@@ -67,15 +91,15 @@ const ExclusiveOffers = () => {
 
               {/* Offer Details */}
               <div className="p-8 flex-grow">
-                <h3 className="text-3xl font-semibold text-white mb-4">
+                <h3 className={`text-3xl font-semibold mb-4 ${cardTitleClass}`}>
                   {offer.title}
                 </h3>
-                <p className="text-gray-400 text-lg mb-6">{offer.description}</p>
+                <p className={`text-lg mb-6 ${cardDescriptionClass}`}>{offer.description}</p>
               </div>
 
-              {/* Price and Button Section */}
+              {/* Price Section (Button was removed from original, kept structure) */}
               <div className="p-8 pt-0 mt-auto flex flex-col justify-between items-center">
-                <span className="text-2xl text-gold mb-6 font-bold">
+                <span className="text-2xl text-gold mb-6 font-bold"> {/* Assuming text-gold works for both modes */}
                   {offer.price}
                 </span>
               </div>
@@ -86,5 +110,4 @@ const ExclusiveOffers = () => {
     </section>
   );
 };
-
 export default ExclusiveOffers;

@@ -17,7 +17,6 @@ export const useAxiosSecure = () => {
                 return res
             },
             async error => {
-                console.log('error cougth from our very own axios interceptors-->', error.response)
                 if (error.response.status === 401 || error.response.status === 403) {
                     logout()
                     navigate('/login')
