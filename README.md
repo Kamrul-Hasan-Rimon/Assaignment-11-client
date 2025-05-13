@@ -12,7 +12,7 @@ The **Modern Hotel Project** is a user-friendly platform that simplifies the pro
 - **Hotel Search**: Search for hotels based on location, price range, and amenities.
 - **Real-time Availability**: Check room availability and make bookings instantly.
 - **Responsive Design**: Fully responsive design for mobile and desktop users.
-- **Admin Dashboard**: Manage hotel details, bookings, and customers from the admin panel.
+- **Dark/Light mode**: Full page has a Dark/Light funtionality.
 - **Ratings & Reviews**: Customers can leave ratings and reviews for hotels.
 - **Filter Options**: Advanced filters to help users find the ideal hotel.
 - **Booking History**: Users can track their booking history and previous stays.
@@ -36,6 +36,7 @@ The **Modern Hotel Project** is a user-friendly platform that simplifies the pro
 
 ## NPM Packages Used
 - `react`: A JavaScript library for building user interfaces.
+- `Datepicker`: a calender for choosing date from npm datepicker package.
 - `tailwindcss`: A utility-first CSS framework for rapid UI development.
 - `daisyui`: A plugin for Tailwind CSS that provides pre-designed UI components.
 - `react-router-dom`: Declarative routing for React applications.
