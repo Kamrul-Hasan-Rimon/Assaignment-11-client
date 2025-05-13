@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-// import axios from "axios"; // Not directly used, myaxios is preferred
 import { AuthContext } from "../components/context/AuthProvider";
 import Swal from "sweetalert2";
 import DatePicker from "react-datepicker";
@@ -199,19 +198,19 @@ const MyBookings = () => {
                       <div className="flex flex-col sm:flex-row sm:justify-center items-center gap-1 sm:gap-2">
                         <button
                           onClick={() => handleCancel(booking._id)}
-                          className="px-3 py-1.5 text-xs sm:text-sm bg-gradient-to-r from-red-500 to-pink-500 text-white font-medium rounded-md sm:rounded-lg shadow-md hover:shadow-lg transition duration-300 w-full sm:w-auto"
+                          className="px-6 py-3 text-md sm:text-sm bg-gradient-to-r from-red-500 to-pink-500 text-white font-medium rounded-md sm:rounded-lg shadow-md hover:shadow-lg transition duration-300 w-full sm:w-auto"
                         >
                           Cancel
                         </button>
                         <button
                           onClick={() => handleUpdateDateModalOpen(booking._id)}
-                          className="px-3 py-1.5 text-xs sm:text-sm bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-medium rounded-md sm:rounded-lg shadow-md hover:shadow-lg transition duration-300 w-full sm:w-auto"
+                          className="px-6 py-3 text-xs sm:text-sm bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-medium rounded-md sm:rounded-lg shadow-md hover:shadow-lg transition duration-300 w-full sm:w-auto"
                         >
                           Update Date
                         </button>
                         <button
                           onClick={() => handleReviewModalOpen(booking.roomId)}
-                          className="px-3 py-1.5 text-xs sm:text-sm bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-500 text-white font-medium rounded-md sm:rounded-lg shadow-md hover:shadow-xl transition duration-300 w-full sm:w-auto"
+                          className="px-6 py-3 text-xs sm:text-sm bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-500 text-white font-medium rounded-md sm:rounded-lg shadow-md hover:shadow-xl transition duration-300 w-full sm:w-auto"
                         >
                           Review
                         </button>
