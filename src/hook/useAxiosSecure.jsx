@@ -3,7 +3,7 @@ import { useContext, useEffect } from 'react'
 import { AuthContext } from '../components/context/AuthProvider'
 import { useNavigate } from 'react-router-dom'
 export const myaxios = axios.create({
-    baseURL: import.meta.env.VITE_API,
+    baseURL: 'https://modern-hotel-server.vercel.app',
     withCredentials: true,
 })
 

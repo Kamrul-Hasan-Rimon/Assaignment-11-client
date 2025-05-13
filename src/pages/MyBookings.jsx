@@ -22,7 +22,7 @@ const MyBookings = () => {
   const fetchData = async () => {
     if (!user?.email) return;
     try {
-      const response = await myaxios.get(`/myRooms/${user.email}`);
+      const response = await myaxios.get(`/myRooms/${user?.email}`);
       setBookings(response.data);
     } catch (error) {
       console.error("Failed to fetch data:", error);

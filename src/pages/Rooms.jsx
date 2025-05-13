@@ -15,7 +15,7 @@ const Rooms = () => {
       if (minPrice) params.minPrice = minPrice;
       if (maxPrice) params.maxPrice = maxPrice;
 
-      const response = await axios.get(`${import.meta.env.VITE_API}/rooms`, {
+      const response = await axios.get(`https://modern-hotel-server.vercel.app/rooms`, {
         params,
       });
       setRooms(response.data);

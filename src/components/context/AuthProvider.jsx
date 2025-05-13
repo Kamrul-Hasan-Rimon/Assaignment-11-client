@@ -23,7 +23,7 @@ export default function AuthProvider({ children }) {
         try {
           const userPayload = { email: currentUser.email };
           await axios.post(
-            `${import.meta.env.VITE_API}/jwt`,
+            `https://modern-hotel-server.vercel.app/jwt`,
             userPayload,
             { withCredentials: true }
           );
@@ -36,7 +36,7 @@ export default function AuthProvider({ children }) {
         setUser(null);
         try {
           await axios.post(
-            `${import.meta.env.VITE_API}/logout`,
+            `https://modern-hotel-server.vercel.app/logout`,
             {},
             { withCredentials: true }
           );
