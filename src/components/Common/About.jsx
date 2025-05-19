@@ -55,7 +55,7 @@ const About = () => {
             </div>
 
             <div className={`w-full sm:w-72 ${cardBgClass} p-6 md:p-8 rounded-xl shadow-xl border-2 ${accentBorderColor} text-center`}>
-              <img className="w-24 h-24 md:w-28 md:h-28 rounded-full mx-auto mb-6 shadow-lg object-cover" src="https://scpr.brightspotcdn.com/dims4/default/73e6998/2147483647/strip/true/crop/3632x2421+0+0/resize/1584x1056!/format/webp/quality/90/?url=http%3A%2F%2Fa.scpr.org%2F128959_49a53fb0e2e8cc5b9c1bf6f60812c603_original.jpg" alt="Team Member Jane Smith" />
+              <img className="w-24 h-24 md:w-28 md:h-28 rounded-full mx-auto mb-6 shadow-lg object-cover" src="https://media.licdn.com/dms/image/C4E03AQHTdvV0v3hOSw/profile-displayphoto-shrink_800_800/0/1653851010739?e=2147483647&v=beta&t=jEwxfjN7rXGnMyn4GJZZDU-D4aOsKnWQ8eXhbu_-qZY" alt="Team Member Jane Smith" />
               <h3 className={`text-lg md:text-xl font-semibold ${teamMemberNameColor} mb-2`}>Jane Smith</h3>
               <p className={`${accentColor} text-base md:text-lg`}>Guest Services Manager</p>
             </div>
