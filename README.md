@@ -7,7 +7,6 @@
 ## 🔗 Live Demo
 
 👉 [Visit the Live Website](https://modern-hotel-3e21d.web.app/)  
-*(Replace with your actual URL if different)*
 
 ---
 
@@ -111,7 +110,7 @@ This project is designed to:
 
 ```bash
 # Clone the project
-git clone https://github.com/your-username/modern-hotel.git
+git clone https://github.com/Kamrul-Hasan-Rimon/Assaignment-11-client.git
 cd modern-hotel
 
 # Frontend setup
@@ -138,4 +137,4 @@ npm run dev
 
 🙌 Credits
 Developed with ❤️ by [KAMRUL HASAN]
-📧 lnahar@gmail.com | 🌐 Your Portfolio
+📧 lnahar958@gmail.com | 🌐 Your Portfolio
